@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: sample2
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sample2?useSSL=false
+    username: root
+    password: 123456
+  mvc:
+    throw-exception-if-no-handler-found: true
+server:
+  port: 9091
+  tomcat:
+    uri-encoding: UTF-8
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+mybatis:
+  mapper-locations: classpath:mapperxml/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  helper-dialect: MySQL
+  reasonable: true
+  support-methods-arguments: true
+  page-size-zero: true
+  params: count=countSql
+mapper:
+  enum-as-simple-type: true
+logging:
+  level:
+    org.mengyun: debug
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 2000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+tcc:
+  enabled: true
+  data-source-config:
+    data-source-provider: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tcc?useSSL=false
+    username: root
+    password: 123456
+    domain: SAMPLE2
+    table-suffix: _SAMPLE2

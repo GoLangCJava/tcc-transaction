@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: zuul
+server:
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+zuul:
+  sensitive-headers: "*"
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 2000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 64000
